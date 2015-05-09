@@ -2,6 +2,7 @@
 
 namespace arogachev\excel\import\basic;
 
+use arogachev\excel\helpers\PHPExcelHelper;
 use arogachev\excel\import\BaseImporter;
 use Yii;
 
@@ -14,10 +15,14 @@ class Importer extends BaseImporter
     {
         $c = 1;
         foreach ($rows as $row) {
+            if (PHPExcelHelper::isRowEmpty($row)) {
+                break;
+            }
+
             if ($c == 1) {
                 $this->_standardModels[0]->parseAttributeNames($row);
             } else {
-                $this->_models = new Model([
+                $this->_models[] = new Model([
                     'row' => $row,
                     'standardModel' => $this->_standardModels[0],
                 ]);
@@ -37,6 +42,7 @@ class Importer extends BaseImporter
         $this->fillModels($this->_phpExcel->getActiveSheet()->getRowIterator());
 
         foreach ($this->_models as $model) {
+            $model->load();
             $model->validate();
         }
 

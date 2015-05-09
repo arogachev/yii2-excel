@@ -43,13 +43,14 @@ class Attribute extends Object
                 throw new CellException($this->cell, 'Failed to replace value by replacement query.');
             }
 
-            $value = $models[0]->{$query->select};
+            $value = $models[0]->{$query->select[0]};
         } elseif ($this->_standardAttribute->valueReplacementList) {
-            if (!isset($this->_standardAttribute->valueReplacementList[$value])) {
+            $flippedList = array_flip($this->_standardAttribute->valueReplacementList);
+            if (!isset($flippedList[$value])) {
                 throw new CellException($this->cell, 'Failed to replace value by replacement list.');
             }
 
-            $value = $this->_standardAttribute->valueReplacementList[$value];
+            $value = $flippedList[$value];
         }
 
         $this->_value = $value;

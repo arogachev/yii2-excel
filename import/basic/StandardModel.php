@@ -37,7 +37,7 @@ class StandardModel extends Object
     /**
      * @var boolean
      */
-    public $setScenario = true;
+    public $setScenario = false;
 
     /**
      * @var array
@@ -179,8 +179,6 @@ class StandardModel extends Object
             $this->_standardAttributes[$cell->getValue()]->column = $cell->getColumn();
             $attributeNames[] = $cell->getValue();
         }
-
-        ArrayHelper::multisort($this->_standardAttributes, 'column');
 
         $pk = $model->primaryKey();
         $filledPk = array_intersect($pk, $attributeNames);

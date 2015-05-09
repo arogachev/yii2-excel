@@ -50,10 +50,8 @@ class Model extends Component
         $sheet = $this->row->getCellIterator()->current()->getWorksheet();
 
         foreach ($this->_standardModel->standardAttributes as $standardAttribute) {
-            if (!$standardAttribute->column) {
-                break;
-            } else {
-                $this->_attributes = new Attribute([
+            if ($standardAttribute->column) {
+                $this->_attributes[] = new Attribute([
                     'standardAttribute' => $standardAttribute,
                     'cell' => $sheet->getCell($standardAttribute->column . $this->row->getRowIndex()),
                 ]);
@@ -77,6 +75,10 @@ class Model extends Component
         }
 
         if (!$pk) {
+            return;
+        }
+
+        if (count($pk) == 1 && !reset($pk)) {
             return;
         }
 
@@ -125,11 +127,27 @@ class Model extends Component
     }
 
     /**
+     * @return StandardModel
+     */
+    public function getStandardModel()
+    {
+        return $this->_standardModel;
+    }
+
+    /**
      * @param StandardModel $value
      */
     public function setStandardModel($value)
     {
         $this->_standardModel = $value;
+    }
+
+    /**
+     * @return \yii\db\ActiveRecord
+     */
+    public function getInstance()
+    {
+        return $this->_instance;
     }
 
     /**

@@ -20,7 +20,10 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "phpoffice/phpexcel": "dev-develop"
+        "phpoffice/phpexcel": "1.8.*"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "~2.0"
     },
     "autoload": {
         "psr-4": {

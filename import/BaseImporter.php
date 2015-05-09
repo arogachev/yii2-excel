@@ -71,7 +71,7 @@ abstract class BaseImporter extends Component
         }
 
         foreach ($this->standardModelsConfig as $config) {
-            $this->_standardModels = new StandardModel($config);
+            $this->_standardModels[] = new StandardModel($config);
         }
 
         $this->configureEventHandlers();
