@@ -23,14 +23,9 @@ class StandardAttribute extends Object
     public $label;
 
     /**
-     * @var callable
+     * @var array|callable
      */
-    public $valueReplacementQuery;
-
-    /**
-     * @var array
-     */
-    public $valueReplacementList = [];
+    public $valueReplacement;
 
     /**
      * @var StandardModel
@@ -55,7 +50,7 @@ class StandardAttribute extends Object
         }
 
         $this->validateLabel();
-        $this->validateValueReplacementList();
+        $this->validateValueReplacement();
     }
 
     /**
@@ -100,13 +95,13 @@ class StandardAttribute extends Object
     /**
      * @throws StandardAttributeException
      */
-    protected function validateValueReplacementList()
+    protected function validateValueReplacement()
     {
-        if (!$this->valueReplacementList) {
+        if (!$this->valueReplacement || !is_array($this->valueReplacement)) {
             return;
         }
 
-        if ($this->valueReplacementList != array_unique($this->valueReplacementList)) {
+        if ($this->valueReplacement != array_unique($this->valueReplacement)) {
             throw new StandardAttributeException($this, 'Value replacement list contains duplicate labels / values.');
         }
     }

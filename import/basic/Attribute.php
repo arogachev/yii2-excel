@@ -4,7 +4,9 @@ namespace arogachev\excel\import\basic;
 
 use arogachev\excel\import\exceptions\CellException;
 use PHPExcel_Cell;
+use yii\base\InvalidParamException;
 use yii\base\Object;
+use yii\db\ActiveQuery;
 
 /**
  * @property StandardAttribute $standardAttribute
@@ -33,24 +35,45 @@ class Attribute extends Object
      */
     public function init()
     {
+        if (!$this->_standardAttribute->valueReplacement) {
+            $this->_value = $this->cell->getValue();
+        } else {
+            $this->replaceValue();
+        }
+    }
+
+    /**
+     * @throws CellException
+     * @throws InvalidParamException
+     */
+    protected function replaceValue()
+    {
+        $valueReplacement = $this->_standardAttribute->valueReplacement;
         $value = $this->cell->getValue();
 
-        if ($this->_standardAttribute->valueReplacementQuery) {
-            $query = call_user_func($this->_standardAttribute->valueReplacementQuery, $value);
-            $models = $query->all();
-
-            if (count($models) != 1) {
-                throw new CellException($this->cell, 'Failed to replace value by replacement query.');
-            }
-
-            $value = $models[0]->{$query->select[0]};
-        } elseif ($this->_standardAttribute->valueReplacementList) {
-            $flippedList = array_flip($this->_standardAttribute->valueReplacementList);
+        if (is_array($valueReplacement)) {
+            $flippedList = array_flip($valueReplacement);
             if (!isset($flippedList[$value])) {
                 throw new CellException($this->cell, 'Failed to replace value by replacement list.');
             }
 
             $value = $flippedList[$value];
+        } elseif (is_callable($valueReplacement)) {
+            $result = call_user_func($valueReplacement, $value);
+
+            if ($result instanceof ActiveQuery) {
+                $models = $result->all();
+
+                if (count($models) != 1) {
+                    throw new CellException($this->cell, 'Failed to replace value by replacement query.');
+                }
+
+                $value = $models[0]->{$result->select[0]};
+            } else {
+                $value = $result;
+            }
+        } else {
+            throw new InvalidParamException('$valueReplacement must be specified as array or callable.');
         }
 
         $this->_value = $value;

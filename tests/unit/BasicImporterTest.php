@@ -4,6 +4,7 @@ use arogachev\excel\import\basic\Importer;
 use data\Author;
 use data\Test;
 use yii\codeception\TestCase;
+use yii\helpers\Html;
 
 class BasicImporterTest extends TestCase
 {
@@ -27,11 +28,17 @@ class BasicImporterTest extends TestCase
                     'standardAttributesConfig' => [
                         [
                             'name' => 'type',
-                            'valueReplacementList' => Test::getTypesList(),
+                            'valueReplacement' => Test::getTypesList(),
+                        ],
+                        [
+                            'name' => 'description',
+                            'valueReplacement' => function ($value) {
+                                return Html::tag('p', $value);
+                            },
                         ],
                         [
                             'name' => 'author_id',
-                            'valueReplacementQuery' => function ($value) {
+                            'valueReplacement' => function ($value) {
                                 return Author::find()->select('id')->where(['name' => $value]);
                             },
                         ],
@@ -46,18 +53,21 @@ class BasicImporterTest extends TestCase
             'id' => 1,
             'name' => 'Basic test',
             'type' => 2,
+            'description' => '<p>This is the basic test</p>',
             'author_id' => 2,
         ]);
         $this->assertEquals(Test::findOne(2)->attributes, [
             'id' => 2,
             'name' => 'Common test',
             'type' => 1,
+            'description' => '',
             'author_id' => 1,
         ]);
         $this->assertEquals(Test::findOne(3)->attributes, [
             'id' => 3,
             'name' => 'Programming test',
             'type' => 2,
+            'description' => '',
             'author_id' => 2,
         ]);
     }

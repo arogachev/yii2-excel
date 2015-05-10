@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $name
  * @property integer $type
+ * @property string $description
  * @property integer $author_id
  */
 class Test extends ActiveRecord
@@ -39,7 +40,7 @@ class Test extends ActiveRecord
     {
         return [
             [['name', 'type', 'author_id'], 'required'],
-            ['name', 'string'],
+            [['name', 'description'], 'string'],
             ['type', 'in', 'range' => array_keys(static::getTypesList())],
             ['author_id', 'exist', 'targetClass' => Author::className(), 'targetAttribute' => 'id'],
         ];
@@ -52,8 +53,6 @@ class Test extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'type' => 'Type',
             'author_id' => 'Author',
         ];
     }

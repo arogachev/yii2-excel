@@ -12,9 +12,10 @@ CREATE TABLE "tests" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   "name" text NOT NULL,
   "type" integer NOT NULL,
+  "description" text NOT NULL,
   "author_id" integer NOT NULL
 );
 
-INSERT INTO "tests" ("id", "name", "type", "author_id") VALUES (1, 'Common test', 1, 1);
+INSERT INTO "tests" ("id", "name", "type", "description", "author_id") VALUES (1, 'Common test', 1, '<p>This is the common test</p>', 1);
 
 COMMIT;
