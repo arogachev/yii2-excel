@@ -49,7 +49,7 @@ class Attribute extends BasicAttribute
             }
         }
 
-        if ($this->_relatedModel) {
+        if (!$this->_relatedModel) {
             throw new CellException($this->cell, 'Related model not found.');
         }
     }
