@@ -102,4 +102,12 @@ class Attribute extends Object
     {
         return $this->_value;
     }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value)
+    {
+        $this->_value = $value;
+    }
 }

@@ -51,12 +51,20 @@ class Model extends Component
 
         foreach ($this->_standardModel->standardAttributes as $standardAttribute) {
             if ($standardAttribute->column) {
-                $this->_attributes[] = new Attribute([
+                $this->initAttribute([
                     'standardAttribute' => $standardAttribute,
                     'cell' => $sheet->getCell($standardAttribute->column . $this->row->getRowIndex()),
                 ]);
             }
         }
+    }
+
+    /**
+     * @param array $config
+     */
+    protected function initAttribute($config)
+    {
+        $this->_attributes[] = new Attribute($config);
     }
 
     public function load()

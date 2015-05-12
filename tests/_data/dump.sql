@@ -18,4 +18,12 @@ CREATE TABLE "tests" (
 
 INSERT INTO "tests" ("id", "name", "type", "description", "author_id") VALUES (1, 'Common test', 1, '<p>This is the common test</p>', 1);
 
+CREATE TABLE "questions" (
+  "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "test_id" integer NOT NULL,
+  "content" text NOT NULL,
+  "sort" integer NOT NULL,
+  FOREIGN KEY ("test_id") REFERENCES "tests" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 COMMIT;

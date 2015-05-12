@@ -169,7 +169,7 @@ class StandardModel extends Object
 
         foreach ($row->getCellIterator() as $cell) {
             if (!$cell->getValue()) {
-                throw new CellException($cell, 'Attribute not specified.');
+                continue;
             }
 
             if (!in_array($cell->getValue(), $standardAttributeNames)) {
@@ -188,6 +188,8 @@ class StandardModel extends Object
         if ($filledPk && count($pk) != count($filledPk)) {
             throw new RowException($row, 'All primary key attributes must be specified for updating model.');
         }
+
+        return !empty($attributeNames);
     }
 
     /**

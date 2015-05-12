@@ -16,6 +16,7 @@ use yii\base\InvalidParamException;
  * @property PHPExcel $phpExcel
  * @property string $error
  * @property \yii\db\ActiveRecord $wrongModel
+ * @property Model[] $models
  */
 abstract class BaseImporter extends Component
 {
@@ -71,11 +72,19 @@ abstract class BaseImporter extends Component
         }
 
         foreach ($this->standardModelsConfig as $config) {
-            $this->_standardModels[] = new StandardModel($config);
+            $this->initStandardModel($config);
         }
 
         $this->configureEventHandlers();
         DI::setImporter($this);
+    }
+
+    /**
+     * @param array $config
+     */
+    protected function initStandardModel($config)
+    {
+        $this->_standardModels[] = new StandardModel($config);
     }
 
     protected function configureEventHandlers()
@@ -136,6 +145,14 @@ abstract class BaseImporter extends Component
     public function setWrongModel($value)
     {
         $this->_wrongModel = $value;
+    }
+
+    /**
+     * @return Model[]
+     */
+    public function getModels()
+    {
+        return $this->_models;
     }
 
     /**

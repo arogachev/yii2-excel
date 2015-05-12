@@ -4,6 +4,7 @@ namespace arogachev\excel\import\basic;
 
 use arogachev\excel\helpers\PHPExcelHelper;
 use arogachev\excel\import\BaseImporter;
+use arogachev\excel\import\exceptions\RowException;
 use Yii;
 
 class Importer extends BaseImporter
@@ -20,7 +21,9 @@ class Importer extends BaseImporter
             }
 
             if ($c == 1) {
-                $this->_standardModels[0]->parseAttributeNames($row);
+                if (!$this->_standardModels[0]->parseAttributeNames($row)) {
+                    throw new RowException($row, 'Attribute names must be placed in first filled row.');
+                }
             } else {
                 $this->_models[] = new Model([
                     'row' => $row,
