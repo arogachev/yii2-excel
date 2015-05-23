@@ -141,6 +141,8 @@ class Importer extends BaseImporter
 
             if ($this->_currentSavedRow) {
                 $this->_savedRows[$this->_currentSavedRow][] = clone $row;
+
+                continue;
             }
 
             if ($this->_cellParser->isModelDefaultsLabel($currentCell)) {
