@@ -4,15 +4,15 @@ namespace arogachev\excel\import\basic;
 
 use arogachev\excel\import\exceptions\CellException;
 use PHPExcel_Cell;
+use yii\base\Component;
 use yii\base\InvalidParamException;
-use yii\base\Object;
 use yii\db\ActiveQuery;
 
 /**
  * @property StandardAttribute $standardAttribute
  * @property mixed $value
  */
-class Attribute extends Object
+class Attribute extends Component
 {
     /**
      * @var PHPExcel_Cell

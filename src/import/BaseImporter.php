@@ -124,6 +124,14 @@ abstract class BaseImporter extends Component
     }
 
     /**
+     * @return PHPExcel
+     */
+    public function getPhpExcel()
+    {
+        return $this->_phpExcel;
+    }
+
+    /**
      * @return string
      */
     public function getError()
