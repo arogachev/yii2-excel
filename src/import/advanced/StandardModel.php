@@ -33,6 +33,7 @@ class StandardModel extends BasicStandardModel
      */
     public function setDefaultAttributes($row)
     {
+        $this->_defaultAttributes = [];
         $sheet = $row->getCellIterator()->current()->getWorksheet();
         foreach ($this->_standardAttributes as $standardAttribute) {
             if ($standardAttribute->column) {

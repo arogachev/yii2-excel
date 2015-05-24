@@ -26,4 +26,12 @@ CREATE TABLE "questions" (
   FOREIGN KEY ("test_id") REFERENCES "tests" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE "answers" (
+  "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "question_id" integer NOT NULL,
+  "content" text NOT NULL,
+  "sort" integer NOT NULL,
+  FOREIGN KEY ("question_id") REFERENCES "questions" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 COMMIT;

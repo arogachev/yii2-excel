@@ -61,10 +61,16 @@ class Model extends BasicModel
             $isFound = false;
             foreach ($this->_attributes as $index => $attribute) {
                 $namesMatch = $defaultAttribute->standardAttribute->name == $attribute->standardAttribute->name;
-                if ($namesMatch && $attribute->value = null) {
+                if (!$namesMatch) {
+                    continue;
+                } else {
+                    $isFound = true;
+                }
+
+                $isLoadedPk = DI::getCellParser()->isLoadedPk($attribute->getInitialCell());
+                if ($namesMatch && $attribute->value === null && !$isLoadedPk) {
                     $defaultAttribute->linkRelatedModel();
                     $this->_attributes[$index] = $defaultAttribute;
-                    $isFound = true;
 
                     break;
                 }
@@ -88,7 +94,7 @@ class Model extends BasicModel
     {
         foreach ($this->_attributes as $attribute) {
             if ($attribute->relatedModel) {
-                $attribute->value = $attribute->relatedModel->_instance->primaryKey;
+                $attribute->value = $attribute->relatedModel->instance->primaryKey;
             }
         }
     }

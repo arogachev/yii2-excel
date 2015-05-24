@@ -1,6 +1,7 @@
 <?php
 
 use arogachev\excel\import\advanced\Importer;
+use data\Answer;
 use data\Author;
 use data\Question;
 use data\Test;
@@ -51,6 +52,10 @@ class AdvancedImporterTest extends TestCase
                     'className' => Question::className(),
                     'labels' => ['Question', 'Questions'],
                 ],
+                [
+                    'className' => Answer::className(),
+                    'labels' => ['Answer', 'Answers'],
+                ],
             ],
         ]);
 
@@ -95,7 +100,7 @@ class AdvancedImporterTest extends TestCase
             'author_id' => 1,
         ]);
 
-        $this->assertEquals(Question::find()->count(), 4);
+        $this->assertEquals(Question::find()->count(), 5);
         $this->assertEquals(Question::findOne(1)->attributes, [
             'id' => 1,
             'test_id' => 1,
@@ -118,6 +123,26 @@ class AdvancedImporterTest extends TestCase
             'id' => 4,
             'test_id' => 5,
             'content' => 'How old are you?',
+            'sort' => 2,
+        ]);
+        $this->assertEquals(Question::findOne(5)->attributes, [
+            'id' => 5,
+            'test_id' => 1,
+            'content' => 'Yes or no?',
+            'sort' => 1,
+        ]);
+
+        $this->assertEquals(Answer::find()->count(), 2);
+        $this->assertEquals(Answer::findOne(1)->attributes, [
+            'id' => 1,
+            'question_id' => 5,
+            'content' => 'Yes',
+            'sort' => 1,
+        ]);
+        $this->assertEquals(Answer::findOne(2)->attributes, [
+            'id' => 2,
+            'question_id' => 5,
+            'content' => 'No',
             'sort' => 2,
         ]);
     }
