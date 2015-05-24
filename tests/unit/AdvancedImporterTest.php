@@ -110,13 +110,13 @@ class AdvancedImporterTest extends TestCase
         ]);
         $this->assertEquals(Question::findOne(3)->attributes, [
             'id' => 3,
-            'test_id' => 1,
+            'test_id' => 5,
             'content' => "What's your name?",
             'sort' => 1,
         ]);
         $this->assertEquals(Question::findOne(4)->attributes, [
             'id' => 4,
-            'test_id' => 1,
+            'test_id' => 5,
             'content' => 'How old are you?',
             'sort' => 2,
         ]);

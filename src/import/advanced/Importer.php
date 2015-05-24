@@ -113,13 +113,15 @@ class Importer extends BaseImporter
             // Skipping completely empty rows
             // Only loaded pk links can be empty
 
+            $isRowEmpty = PHPExcelHelper::isRowEmpty($row);
+            $row->getCellIterator()->rewind();
             $currentCell = $row->getCellIterator()->current();
 
             if (!$row->getCellIterator()->valid()) {
                 continue;
             }
 
-            if (PHPExcelHelper::isRowEmpty($row) && !$this->_cellParser->isLoadedPk($currentCell)) {
+            if ($isRowEmpty && !$this->_cellParser->isLoadedPk($currentCell)) {
                 continue;
             }
 
