@@ -207,4 +207,12 @@ class StandardModel extends Object
     {
         return $this->_standardAttributes;
     }
+
+    /**
+     * @param StandardAttribute[] $value
+     */
+    public function setStandardAttributes($value)
+    {
+        $this->_standardAttributes = $value;
+    }
 }

@@ -10,6 +10,8 @@ use yii\db\ActiveRecord;
  * @property integer $type
  * @property string $description
  * @property integer $author_id
+ *
+ * @property Author $author
  */
 class Test extends ActiveRecord
 {
@@ -58,6 +60,14 @@ class Test extends ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(Author::className(), ['id' => 'author_id']);
+    }
+
+    /**
      * @return array
      */
     public static function getTypesList()
@@ -66,5 +76,13 @@ class Test extends ActiveRecord
             self::TYPE_CLOSED => 'Closed',
             self::TYPE_OPENED => 'Opened',
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeLabel()
+    {
+        return static::getTypesList()[$this->type];
     }
 }
