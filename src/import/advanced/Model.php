@@ -69,18 +69,31 @@ class Model extends BasicModel
 
                 $isLoadedPk = DI::getCellParser()->isLoadedPk($attribute->getInitialCell());
                 if ($namesMatch && $attribute->value === null && !$isLoadedPk) {
-                    $defaultAttribute->linkRelatedModel();
-                    $this->_attributes[$index] = $defaultAttribute;
+                    $this->mergeDefaultAttribute($defaultAttribute, $index);
 
                     break;
                 }
             }
 
             if (!$isFound) {
-                $defaultAttribute->linkRelatedModel();
-                $this->_attributes[] = $defaultAttribute;
+                $this->mergeDefaultAttribute($defaultAttribute);
             }
         }
+    }
+
+    /**
+     * @param Attribute $defaultAttribute
+     * @param null|integer $index
+     * @throws \arogachev\excel\import\exceptions\CellException
+     */
+    protected function mergeDefaultAttribute($defaultAttribute, $index = null)
+    {
+        $attribute = new Attribute([
+            'standardAttribute' => $defaultAttribute->standardAttribute,
+            'cell' => $defaultAttribute->getInitialCell(),
+        ]);
+        $attribute->linkRelatedModel();
+        $index === null ? $this->_attributes[] = $attribute : $this->_attributes[$index] = $attribute;
     }
 
     public function load()
@@ -88,6 +101,20 @@ class Model extends BasicModel
         $this->loadExisting();
         $this->replaceSavedPkLinks();
         $this->assignMassively();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function isPkFull()
+    {
+        foreach ($this->getPk() as $attribute) {
+            if (!$attribute->value && !DI::getCellParser()->isLoadedPk($attribute->getInitialCell())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     protected function replaceSavedPkLinks()

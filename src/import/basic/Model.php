@@ -75,35 +75,69 @@ class Model extends Component
 
     protected function loadExisting()
     {
-        $pk = [];
-        foreach ($this->_attributes as $attribute) {
-            if (in_array($attribute->standardAttribute->name, $this->_instance->primaryKey())) {
-                $pk[$attribute->standardAttribute->name] = $attribute->value;
-            }
-        }
-
-        if (!$pk) {
+        $pkValues = $this->getPkValues();
+        if (!$pkValues) {
             return;
         }
 
-        if (count($pk) == 1 && !reset($pk)) {
+        if (count($pkValues) == 1 && !reset($pkValues)) {
             return;
         }
 
-        foreach ($pk as $value) {
-            if (!$value) {
-                throw new RowException($this->row, 'For updated model all primary key attributes must be specified.');
-            }
+        if (!$this->isPkFull()) {
+            throw new RowException($this->row, 'For updated model all primary key attributes must be specified.');
         }
 
         /* @var $modelClass \yii\db\ActiveRecord */
         $modelClass = $this->_standardModel->className;
-        $model = $modelClass::findOne($pk);
+        $model = $modelClass::findOne($pkValues);
         if (!$model) {
             throw new RowException($this->row, 'Model for update not found.');
         }
 
         $this->_instance = $model;
+    }
+
+    /**
+     * @return Attribute[]
+     */
+    protected function getPk()
+    {
+        $attributes = [];
+        foreach ($this->_attributes as $attribute) {
+            if (in_array($attribute->standardAttribute->name, $this->_instance->primaryKey())) {
+                $attributes[] = $attribute;
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPkValues()
+    {
+        $values = [];
+        foreach ($this->getPk() as $attribute) {
+            $values[$attribute->standardAttribute->name] = $attribute->value;
+        }
+
+        return $values;
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function isPkFull()
+    {
+        foreach ($this->getPkValues() as $value) {
+            if (!$value) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     protected function assignMassively()
