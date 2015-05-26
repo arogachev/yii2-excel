@@ -121,7 +121,7 @@ class Exporter extends Object
             $filePath = is_callable($this->filePath) ? call_user_func($this->filePath) : $this->filePath;
             $writer->save($filePath);
         } else {
-            $fileName = is_callable($this->filePath) ? call_user_func($this->fileName) : $this->fileName;
+            $fileName = is_callable($this->fileName) ? call_user_func($this->fileName) : $this->fileName;
             header('Content-Type: application/ms-excel');
             header("Content-Disposition: attachment;filename=\"$fileName\"");
             header('Cache-Control: max-age=0');
