@@ -108,7 +108,7 @@ class StandardModel extends Object
         }
 
         $attributeLabels = ArrayHelper::getColumn($this->_standardAttributes, 'name', 'label');
-        if ($attributeLabels != array_unique($attributeLabels)) {
+        if ($this->extendStandardAttributes && $attributeLabels != array_unique($attributeLabels)) {
             throw new InvalidParamException("For standard model \"$this->className\" attribute labels are not unique.");
         }
     }
