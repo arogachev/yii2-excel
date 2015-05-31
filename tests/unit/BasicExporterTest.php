@@ -22,6 +22,7 @@ class BasicExporterTest extends TestCase
             'standardModelsConfig' => [
                 [
                     'className' => Test::className(),
+                    'attributesOrder' => ['ID', 'Name', 'Type', 'Description', 'Author Name', 'Author Rating'],
                     'standardAttributesConfig' => [
                         [
                             'name' => 'type',
@@ -40,16 +41,24 @@ class BasicExporterTest extends TestCase
                             },
                         ],
                         [
-                            'name' => 'author_id',
+                            'name' => 'author_name',
+                            'label' => 'Author Name',
                             'valueReplacement' => function ($model) {
                                 /* @var $model Test */
                                 return $model->author->name;
                             },
                         ],
+                        [
+                            'name' => 'author_rating',
+                            'label' => 'Author Rating',
+                            'valueReplacement' => function ($model) {
+                                /* @var $model Test */
+                                return $model->author->rating;
+                            },
+                        ],
                     ],
                 ],
             ],
-            'attributesOrder' => ['ID', 'Name', 'Type', 'Description', 'Author'],
         ]);
 
         $exporter->run();
@@ -76,20 +85,23 @@ class BasicExporterTest extends TestCase
         }
 
         $attributeValues['A'] = (int) $attributeValues['A'];
+        $attributeValues['F'] = (int) $attributeValues['F'];
 
         $this->assertEquals($attributeNames, [
             'A' => 'ID',
             'B' => 'Name',
             'C' => 'Type',
             'D' => 'Description',
-            'E' => 'Author'
+            'E' => 'Author Name',
+            'F' => 'Author Rating',
         ]);
         $this->assertEquals($attributeValues, [
             'A' => 1,
             'B' => 'Common test',
             'C' => 'Closed',
             'D' => 'This is the common test',
-            'E' => 'Ivan Ivanov'
+            'E' => 'Ivan Ivanov',
+            'F' => 7,
         ]);
     }
 }

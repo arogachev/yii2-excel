@@ -1,10 +1,11 @@
 <?php
 
-namespace arogachev\excel\import\exceptions;
+namespace arogachev\excel\exceptions;
 
-use arogachev\excel\import\basic\StandardAttribute;
+use arogachev\excel\components\StandardAttribute;
+use yii\base\Exception;
 
-class StandardAttributeException extends ImportException
+class StandardAttributeException extends Exception
 {
     /**
      * @param StandardAttribute $standardAttribute

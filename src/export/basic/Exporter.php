@@ -2,7 +2,6 @@
 
 namespace arogachev\excel\export\basic;
 
-use arogachev\excel\import\basic\StandardModel;
 use PHPExcel;
 use PHPExcel_IOFactory;
 use yii\base\Exception;
@@ -15,11 +14,6 @@ class Exporter extends Object
      * @var \yii\db\ActiveQuery
      */
     public $query;
-
-    /**
-     * @var \yii\db\ActiveRecord[]
-     */
-    public $models;
 
     /**
      * @var string|callable
@@ -42,11 +36,6 @@ class Exporter extends Object
     public $standardModelsConfig;
 
     /**
-     * @var array
-     */
-    public $attributesOrder = [];
-
-    /**
      * @var PHPExcel
      */
     protected $_phpExcel;
@@ -55,6 +44,11 @@ class Exporter extends Object
      * @var StandardModel[]
      */
     protected $_standardModels;
+
+    /**
+     * @var Model[]
+     */
+    protected $_models;
 
 
     /**
@@ -71,19 +65,6 @@ class Exporter extends Object
                 return 'Export ' . date('Y-m-d H:i:s');
             };
         }
-
-        $this->sortStandardAttributes();
-    }
-
-    protected function sortStandardAttributes()
-    {
-        if (!$this->attributesOrder) {
-            return;
-        }
-
-        $standardAttributes = $this->_standardModels[0]->standardAttributes;
-        $sortedStandardAttributes = array_merge(array_flip($this->attributesOrder), $standardAttributes);
-        $this->_standardModels[0]->standardAttributes = $sortedStandardAttributes;
     }
 
     public function run()
@@ -91,27 +72,13 @@ class Exporter extends Object
         $this->_phpExcel = new PHPExcel;
         $sheet = $this->_phpExcel->getActiveSheet();
 
+        $this->fillModels();
         $this->fillSheetTitle();
+        $this->_standardModels[0]->exportAttributeNames($sheet);
 
-        $column = 'A';
-        $row = 1;
-
-        foreach ($this->_standardModels[0]->standardAttributes as $name => $standardAttribute) {
-            $standardAttribute->column = $column;
-            $sheet->setCellValue($column . $row, $name);
-            $column++;
-        }
-
-        $models = $this->models ?: $this->query->all();
-        $row++;
-
-        foreach ($models as $model) {
-            foreach ($this->_standardModels[0]->standardAttributes as $standardAttribute) {
-                $this->replaceValue($model, $standardAttribute);
-                $sheet->setCellValue($standardAttribute->column . $row, $model->{$standardAttribute->name});
-                $column++;
-            }
-
+        $row = 2;
+        foreach ($this->_models as $model) {
+            $model->exportAttributeValues($sheet, $row);
             $row++;
         }
 
@@ -135,32 +102,14 @@ class Exporter extends Object
         $this->_phpExcel->getActiveSheet()->setTitle($title);
     }
 
-    /**
-     * @param \yii\db\ActiveRecord $model
-     * @param \arogachev\excel\import\basic\StandardAttribute $standardAttribute
-     * @throws Exception
-     * @throws InvalidParamException
-     */
-    protected function replaceValue($model, $standardAttribute)
+    protected function fillModels()
     {
-        if (!$standardAttribute->valueReplacement) {
-            return;
+        $models = $this->query->all();
+        foreach ($models as $model) {
+            $this->_models[] = new Model([
+                'instance' => $model,
+                'standardModel' => $this->_standardModels[0],
+            ]);
         }
-
-        $value = $model->{$standardAttribute->name};
-
-        if (is_array($standardAttribute->valueReplacement)) {
-            if (!isset($standardAttribute->valueReplacement[$value])) {
-                throw new Exception('Failed to replace value by replacement list.');
-            }
-
-            $value = $standardAttribute->valueReplacement[$value];
-        } elseif (is_callable($standardAttribute->valueReplacement)) {
-            $value = call_user_func($standardAttribute->valueReplacement, $model);
-        } else {
-            throw new InvalidParamException('$valueReplacement must be specified as array or callable.');
-        }
-
-        $model->{$standardAttribute->name} = $value;
     }
 }

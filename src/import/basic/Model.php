@@ -2,6 +2,7 @@
 
 namespace arogachev\excel\import\basic;
 
+use arogachev\excel\components\Model as BaseModel;
 use arogachev\excel\import\DI;
 use arogachev\excel\import\exceptions\RowException;
 use PHPExcel_Worksheet_Row;
@@ -9,9 +10,8 @@ use yii\base\Component;
 
 /**
  * @property StandardModel $standardModel
- * @property \yii\db\ActiveRecord $instance
  */
-class Model extends Component
+class Model extends BaseModel
 {
     const EVENT_INIT = 'init';
 
@@ -21,19 +21,9 @@ class Model extends Component
     public $row;
 
     /**
-     * @var StandardModel
+     * @inheritdoc
      */
-    protected $_standardModel;
-
-    /**
-     * @var Attribute[]
-     */
-    protected $_attributes = [];
-
-    /**
-     * @var \yii\db\ActiveRecord
-     */
-    protected $_instance;
+    protected static $attributeClassName = 'arogachev\excel\import\basic\Attribute';
 
 
     /**
@@ -41,7 +31,8 @@ class Model extends Component
      */
     public function init()
     {
-        $this->initAttributes();
+        parent::init();
+
         $this->trigger(self::EVENT_INIT);
     }
 
@@ -57,14 +48,6 @@ class Model extends Component
                 ]);
             }
         }
-    }
-
-    /**
-     * @param array $config
-     */
-    protected function initAttribute($config)
-    {
-        $this->_attributes[] = new Attribute($config);
     }
 
     public function load()
@@ -166,37 +149,5 @@ class Model extends Component
         }
 
         $this->_instance->save(false);
-    }
-
-    /**
-     * @return StandardModel
-     */
-    public function getStandardModel()
-    {
-        return $this->_standardModel;
-    }
-
-    /**
-     * @param StandardModel $value
-     */
-    public function setStandardModel($value)
-    {
-        $this->_standardModel = $value;
-    }
-
-    /**
-     * @return \yii\db\ActiveRecord
-     */
-    public function getInstance()
-    {
-        return $this->_instance;
-    }
-
-    /**
-     * @param \yii\db\ActiveRecord $value
-     */
-    public function setInstance($value)
-    {
-        $this->_instance = $value;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace arogachev\excel\import\basic;
 
+use arogachev\excel\components\StandardModel as BaseStandardModel;
 use arogachev\excel\import\exceptions\CellException;
 use arogachev\excel\import\exceptions\RowException;
 use PHPExcel_Worksheet_Row;
@@ -12,27 +13,11 @@ use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
- * @property ActiveRecord $instance
  * @property StandardAttribute[] $standardAttributes
  */
-class StandardModel extends Object
+class StandardModel extends BaseStandardModel
 {
     const SCENARIO_IMPORT = 'import';
-
-    /**
-     * @var string
-     */
-    public $className;
-
-    /**
-     * @var boolean
-     */
-    public $useAttributeLabels = true;
-
-    /**
-     * @var boolean
-     */
-    public $extendStandardAttributes = true;
 
     /**
      * @var boolean
@@ -40,9 +25,9 @@ class StandardModel extends Object
     public $setScenario = false;
 
     /**
-     * @var array
+     * @inheritdoc
      */
-    public $standardAttributesConfig = [];
+    protected static $standardAttributeClassName = 'arogachev\excel\import\basic\StandardAttribute';
 
     /**
      * @var array
@@ -52,24 +37,14 @@ class StandardModel extends Object
         ActiveRecord::EVENT_AFTER_FIND,
     ];
 
-    /**
-     * @var ActiveRecord
-     */
-    protected $_instance;
-
-    /**
-     * @var StandardAttribute[]
-     */
-    protected $_standardAttributes = [];
-
 
     /**
      * @inheritdoc
      */
     public function init()
     {
-        $this->initInstance();
-        $this->initStandardAttributes();
+        parent::init();
+
         $this->configureEventHandlers();
     }
 
@@ -78,49 +53,11 @@ class StandardModel extends Object
      */
     protected function initInstance()
     {
-        if (!$this->className) {
-            throw new InvalidParamException('Class name is required for standard model.');
-        }
-
-        $this->_instance = new $this->className;
+        parent::initInstance();
 
         if ($this->setScenario) {
             $this->_instance->scenario = self::SCENARIO_IMPORT;
         }
-    }
-
-    /**
-     * @throws InvalidParamException
-     */
-    protected function initStandardAttributes()
-    {
-        foreach ($this->standardAttributesConfig as $config) {
-            $this->initStandardAttribute($config);
-        }
-
-        if ($this->extendStandardAttributes) {
-            $existingAttributes = ArrayHelper::getColumn($this->_standardAttributes, 'name');
-            $missingAttributes = array_diff($this->getAllowedAttributes(), $existingAttributes);
-
-            foreach ($missingAttributes as $attributeName) {
-                $this->initStandardAttribute(['name' => $attributeName]);
-            }
-        }
-
-        $attributeLabels = ArrayHelper::getColumn($this->_standardAttributes, 'name', 'label');
-        if ($attributeLabels != array_unique($attributeLabels)) {
-            throw new InvalidParamException("For standard model \"$this->className\" attribute labels are not unique.");
-        }
-    }
-
-    /**
-     * @param array $config
-     */
-    protected function initStandardAttribute($config)
-    {
-        $standardAttribute = new StandardAttribute(array_merge($config, ['standardModel' => $this]));
-        $propertyName = $this->useAttributeLabels ? 'label' : 'name';
-        $this->_standardAttributes[$standardAttribute->{$propertyName}] = $standardAttribute;
     }
 
     protected function configureEventHandlers()
@@ -190,29 +127,5 @@ class StandardModel extends Object
         }
 
         return !empty($attributeNames);
-    }
-
-    /**
-     * @return ActiveRecord
-     */
-    public function getInstance()
-    {
-        return $this->_instance;
-    }
-
-    /**
-     * @return StandardAttribute[]
-     */
-    public function getStandardAttributes()
-    {
-        return $this->_standardAttributes;
-    }
-
-    /**
-     * @param StandardAttribute[] $value
-     */
-    public function setStandardAttributes($value)
-    {
-        $this->_standardAttributes = $value;
     }
 }

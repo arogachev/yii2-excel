@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 /**
  * @property integer $id
  * @property string $name
+ * @property integer $rating
  */
 class Author extends ActiveRecord
 {

@@ -2,6 +2,7 @@
 
 namespace arogachev\excel\import\basic;
 
+use arogachev\excel\components\Attribute as BaseAttribute;
 use arogachev\excel\import\exceptions\CellException;
 use PHPExcel_Cell;
 use yii\base\Component;
@@ -10,24 +11,13 @@ use yii\db\ActiveQuery;
 
 /**
  * @property StandardAttribute $standardAttribute
- * @property mixed $value
  */
-class Attribute extends Component
+class Attribute extends BaseAttribute
 {
     /**
      * @var PHPExcel_Cell
      */
     public $cell;
-
-    /**
-     * @var StandardAttribute
-     */
-    protected $_standardAttribute;
-
-    /**
-     * @var mixed
-     */
-    protected $_value;
 
 
     /**
@@ -76,38 +66,6 @@ class Attribute extends Component
             throw new InvalidParamException('$valueReplacement must be specified as array or callable.');
         }
 
-        $this->_value = $value;
-    }
-
-    /**
-     * @return StandardAttribute
-     */
-    public function getStandardAttribute()
-    {
-        return $this->_standardAttribute;
-    }
-
-    /**
-     * @param StandardAttribute $value
-     */
-    public function setStandardAttribute($value)
-    {
-        $this->_standardAttribute = $value;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
-
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
-    {
         $this->_value = $value;
     }
 }

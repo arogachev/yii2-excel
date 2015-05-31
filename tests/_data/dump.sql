@@ -2,11 +2,12 @@ BEGIN TRANSACTION;
 
 CREATE TABLE "authors" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "name" text NOT NULL
+  "name" text NOT NULL,
+  "rating" integer NOT NULL
 );
 
-INSERT INTO "authors" ("id", "name") VALUES (1, 'Ivan Ivanov');
-INSERT INTO "authors" ("id", "name") VALUES (2, 'Petr Petrov');
+INSERT INTO "authors" ("id", "name", "rating") VALUES (1, 'Ivan Ivanov', 7);
+INSERT INTO "authors" ("id", "name", "rating") VALUES (2, 'Petr Petrov', 9);
 
 CREATE TABLE "tests" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
