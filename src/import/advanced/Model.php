@@ -106,6 +106,20 @@ class Model extends BasicModel
     /**
      * @inheritdoc
      */
+    protected function loadExisting()
+    {
+        foreach ($this->getPk() as $attribute) {
+            if (DI::getCellParser()->isLoadedPk($attribute->cell)) {
+                return;
+            }
+        }
+
+        parent::loadExisting();
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function isPkFull()
     {
         foreach ($this->getPk() as $attribute) {
