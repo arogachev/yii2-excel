@@ -4,12 +4,15 @@ namespace arogachev\excel\export\basic;
 
 use PHPExcel;
 use PHPExcel_IOFactory;
-use yii\base\Exception;
-use yii\base\InvalidParamException;
 use yii\base\Object;
 
 class Exporter extends Object
 {
+    /**
+     * @var \yii\data\ActiveDataProvider
+     */
+    public $dataProvider;
+
     /**
      * @var \yii\db\ActiveQuery
      */
@@ -56,6 +59,10 @@ class Exporter extends Object
      */
     public function init()
     {
+        if ($this->dataProvider) {
+            $this->dataProvider->pagination = false;
+        }
+
         foreach ($this->standardModelsConfig as $config) {
             $this->_standardModels[] = new StandardModel($config);
         }
@@ -104,7 +111,7 @@ class Exporter extends Object
 
     protected function fillModels()
     {
-        $models = $this->query->all();
+        $models = $this->dataProvider ? $this->dataProvider->getModels() : $this->query->all();
         foreach ($models as $model) {
             $this->_models[] = new Model([
                 'instance' => $model,
