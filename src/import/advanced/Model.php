@@ -98,16 +98,18 @@ class Model extends BasicModel
 
     public function load()
     {
-        $this->replaceSavedPkLinks();
+        $this->replaceValues();
 
         parent::load();
     }
 
-    protected function replaceSavedPkLinks()
+    protected function replaceValues()
     {
         foreach ($this->_attributes as $attribute) {
             if ($attribute->relatedModel) {
                 $attribute->value = $attribute->relatedModel->instance->primaryKey;
+            } elseif ($attribute->standardAttribute->valueReplacement) {
+                $attribute->replaceValue(true);
             }
         }
     }

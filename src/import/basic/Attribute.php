@@ -19,6 +19,10 @@ class Attribute extends BaseAttribute
      */
     public $cell;
 
+    /**
+     * @var boolean
+     */
+    protected $_replaced = false;
 
     /**
      * @inheritdoc
@@ -33,32 +37,38 @@ class Attribute extends BaseAttribute
     }
 
     /**
+     * @param boolean $throwException
      * @throws CellException
      * @throws InvalidParamException
      */
-    protected function replaceValue()
+    public function replaceValue($throwException = false)
     {
+        if ($this->_replaced) {
+            return;
+        }
+
         $valueReplacement = $this->_standardAttribute->valueReplacement;
-        $value = $this->cell->getValue();
+        $cellValue = $this->cell->getValue();
+        $value = null;
 
         if (is_array($valueReplacement)) {
             $flippedList = array_flip($valueReplacement);
-            if (!isset($flippedList[$value])) {
+            if (isset($flippedList[$cellValue])) {
+                $value = $flippedList[$value];
+            } elseif ($throwException) {
                 throw new CellException($this->cell, 'Failed to replace value by replacement list.');
             }
-
-            $value = $flippedList[$value];
         } elseif (is_callable($valueReplacement)) {
-            $result = call_user_func($valueReplacement, $value);
+            $result = call_user_func($valueReplacement, $cellValue);
 
             if ($result instanceof ActiveQuery) {
                 $models = $result->all();
 
-                if (count($models) != 1) {
+                if (count($models) == 1) {
+                    $value = $models[0]->{$result->select[0]};
+                } elseif ($throwException) {
                     throw new CellException($this->cell, 'Failed to replace value by replacement query.');
                 }
-
-                $value = $models[0]->{$result->select[0]};
             } else {
                 $value = $result;
             }
@@ -66,6 +76,9 @@ class Attribute extends BaseAttribute
             throw new InvalidParamException('$valueReplacement must be specified as array or callable.');
         }
 
-        $this->_value = $value;
+        if ($value !== null) {
+            $this->_value = $value;
+            $this->_replaced = true;
+        }
     }
 }
