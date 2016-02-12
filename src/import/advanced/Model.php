@@ -98,29 +98,9 @@ class Model extends BasicModel
 
     public function load()
     {
-        $this->processExisting();
         $this->replaceSavedPkLinks();
-        $this->assignMassively();
-    }
 
-    /**
-     * @inheritdoc
-     */
-    protected function processExisting()
-    {
-        foreach ($this->getPk() as $attribute) {
-            if (DI::getCellParser()->isLoadedPk($attribute->cell)) {
-                return;
-            }
-
-            if (DI::getCellParser()->isUpdatedModel($attribute->cell)) {
-                $this->loadExisting();
-
-                return;
-            }
-        }
-
-        parent::processExisting();
+        parent::load();
     }
 
     protected function replaceSavedPkLinks()

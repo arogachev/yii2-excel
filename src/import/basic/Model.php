@@ -52,38 +52,22 @@ class Model extends BaseModel
 
     public function load()
     {
-        $this->processExisting();
-        $this->assignMassively();
-    }
-
-    protected function processExisting()
-    {
-        $pkValues = $this->getPkValues();
-        if (!$pkValues) {
-            return;
-        }
-
-        if (count($pkValues) == 1 && !reset($pkValues)) {
-            return;
-        }
-
-        if (count($pkValues) > 1) {
-            return;
-        }
-
         $this->loadExisting();
+        $this->assignMassively();
     }
 
     protected function loadExisting()
     {
+        if ($this->isPkEmpty()) {
+            return;
+        }
+
         /* @var $modelClass \yii\db\ActiveRecord */
         $modelClass = $this->_standardModel->className;
         $model = $modelClass::findOne($this->getPkValues());
-        if (!$model) {
-            throw new RowException($this->row, 'Model for update not found.');
+        if ($model) {
+            $this->_instance = $model;
         }
-
-        $this->_instance = $model;
     }
 
     /**
@@ -112,6 +96,20 @@ class Model extends BaseModel
         }
 
         return $values;
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function isPkEmpty()
+    {
+        foreach ($this->getPkValues() as $value) {
+            if ($value) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     protected function assignMassively()
