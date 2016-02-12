@@ -54,7 +54,7 @@ class Attribute extends BaseAttribute
         if (is_array($valueReplacement)) {
             $flippedList = array_flip($valueReplacement);
             if (isset($flippedList[$cellValue])) {
-                $value = $flippedList[$value];
+                $value = $flippedList[$cellValue];
             } elseif ($throwException) {
                 throw new CellException($this->cell, 'Failed to replace value by replacement list.');
             }
