@@ -52,11 +52,11 @@ class Model extends BaseModel
 
     public function load()
     {
-        $this->loadExisting();
+        $this->processExisting();
         $this->assignMassively();
     }
 
-    protected function loadExisting()
+    protected function processExisting()
     {
         $pkValues = $this->getPkValues();
         if (!$pkValues) {
@@ -67,13 +67,18 @@ class Model extends BaseModel
             return;
         }
 
-        if (!$this->isPkFull()) {
-            throw new RowException($this->row, 'For updated model all primary key attributes must be specified.');
+        if (count($pkValues) > 1) {
+            return;
         }
 
+        $this->loadExisting();
+    }
+
+    protected function loadExisting()
+    {
         /* @var $modelClass \yii\db\ActiveRecord */
         $modelClass = $this->_standardModel->className;
-        $model = $modelClass::findOne($pkValues);
+        $model = $modelClass::findOne($this->getPkValues());
         if (!$model) {
             throw new RowException($this->row, 'Model for update not found.');
         }
@@ -107,20 +112,6 @@ class Model extends BaseModel
         }
 
         return $values;
-    }
-
-    /**
-     * @return boolean
-     */
-    protected function isPkFull()
-    {
-        foreach ($this->getPkValues() as $value) {
-            if (!$value) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     protected function assignMassively()

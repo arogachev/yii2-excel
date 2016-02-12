@@ -31,6 +31,11 @@ class CellParser extends Object
     const COLOR_ORANGE = 'F1C232';
 
     /**
+     * Color - Violet
+     */
+    const COLOR_VIOLET = 'FD92FF';
+
+    /**
      * @var callable
      */
     public $modelLabelDetection;
@@ -59,6 +64,11 @@ class CellParser extends Object
      * @var callable
      */
     public $attributeNameGetting;
+
+    /**
+     * @var callable
+     */
+    public $updatedModelDetection;
 
     /**
      * @var callable
@@ -153,6 +163,16 @@ class CellParser extends Object
             $this->attributeNameGetting = function ($cell) {
                 /* @var $cell PHPExcel_Cell */
                 return $cell->getValue();
+            };
+        }
+
+        if (!$this->updatedModelDetection) {
+            $this->updatedModelDetection = function ($cell) {
+                /* @var $cell PHPExcel_Cell */
+                $startColor = $cell->getStyle()->getFill()->getStartColor()->getRGB();
+                $endColor = $cell->getStyle()->getFill()->getEndColor()->getRGB();
+
+                return $startColor == self::COLOR_VIOLET && $endColor == self::COLOR_VIOLET;
             };
         }
 
@@ -289,6 +309,15 @@ class CellParser extends Object
     public function getAttributeName($cell)
     {
         return (string) call_user_func($this->attributeNameGetting, $cell);
+    }
+
+    /**
+     * @param PHPExcel_Cell $cell
+     * @return boolean
+     */
+    public function isUpdatedModel($cell)
+    {
+        return call_user_func($this->updatedModelDetection, $cell);
     }
 
     /**

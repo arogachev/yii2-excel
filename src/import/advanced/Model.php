@@ -98,7 +98,7 @@ class Model extends BasicModel
 
     public function load()
     {
-        $this->loadExisting();
+        $this->processExisting();
         $this->replaceSavedPkLinks();
         $this->assignMassively();
     }
@@ -106,29 +106,21 @@ class Model extends BasicModel
     /**
      * @inheritdoc
      */
-    protected function loadExisting()
+    protected function processExisting()
     {
         foreach ($this->getPk() as $attribute) {
             if (DI::getCellParser()->isLoadedPk($attribute->cell)) {
                 return;
             }
-        }
 
-        parent::loadExisting();
-    }
+            if (DI::getCellParser()->isUpdatedModel($attribute->cell)) {
+                $this->loadExisting();
 
-    /**
-     * @inheritdoc
-     */
-    protected function isPkFull()
-    {
-        foreach ($this->getPk() as $attribute) {
-            if (!$attribute->value && !DI::getCellParser()->isLoadedPk($attribute->getInitialCell())) {
-                return false;
+                return;
             }
         }
 
-        return true;
+        parent::processExisting();
     }
 
     protected function replaceSavedPkLinks()
