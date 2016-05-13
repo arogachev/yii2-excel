@@ -51,7 +51,7 @@ class Exporter extends Object
     /**
      * @var Model[]
      */
-    protected $_models;
+    protected $_models = [];
 
 
     /**
