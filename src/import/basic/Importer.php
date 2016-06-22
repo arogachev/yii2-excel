@@ -47,13 +47,14 @@ class Importer extends BaseImporter
         foreach ($this->_models as $model) {
             $model->load();
             $model->validate();
+            $model->save(false);
         }
 
-        Yii::$app->db->transaction(function () {
+        /*Yii::$app->db->transaction(function () {
             foreach ($this->_models as $model) {
                 $model->save(false);
             }
-        });
+        });*/
 
         $this->trigger(self::EVENT_RUN);
     }
