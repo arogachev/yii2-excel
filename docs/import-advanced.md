@@ -130,11 +130,11 @@ But you can redefine the order and amount of used columns for each standard mode
 
 We can remember any model like this:
 
-|       | A                | B      | C                        | D           | E                |
-| ----- | ---------------- | ------ | ------------------------ | ----------- | ---------------- |
-| **1** | **Tests**        |        |                          |             |                  |
-| **2** | *Name*           | *Type* | *Description*            | *Category*  |                  |
-| **3** | Temperament test | Closed | This is temperament test | Psychology  | Temperament test |
+|       | A        | B      | C                             | D           | E        |
+| ----- | -------- | ------ | ----------------------------- | ----------- | -------- |
+| **1** | **Test** |        |                               |             |          |
+| **2** | *Name*   | *Type* | *Description*                 | *Category*  |          |
+| **3** | PHP test | Closed | How good are your PHP skills? | Programming | PHP test |
 
 The cell must be located right after the last filled attribute column and have **blue filling** (you can override
 that). You need to specify label of saved link, in this case it matches the `name` attribute of the model. The label
@@ -142,12 +142,12 @@ can have any name that your want and only used in Excel file for linking purpose
 
 Later you can retrieve that link and use it like that:
 
-|       | A                | B                                | C                 |
-| ----- |----------------- | -------------------------------- | ----------------- |
-| **4** |                  |                                  |                   |
-| **5** | **Question**     |                                  |                   |
-| **6** | *Test*           | *Content*                        | *Answers display* |
-| **7** | Temperament test | What PHP frameworks do you know? | Line-by-line      |
+|       | A            | B                                | C                 |
+| ----- |------------- | -------------------------------- | ----------------- |
+| **4** |              |                                  |                   |
+| **5** | **Question** |                                  |                   |
+| **6** | *Test*       | *Content*                        | *Answers display* |
+| **7** | PHP test     | What PHP frameworks do you know? | Line-by-line      |
 
 The cell `A9` must have **yellow filling** (you can override that), otherwise it will be treated as value, not link.
 
