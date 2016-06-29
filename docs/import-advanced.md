@@ -17,10 +17,10 @@ There are few types of cells in advanced import:
 - Standard attribute name. By default it's written in *italic* font.
 - Attribute value. It's written in regular font.
 - Defaults section for standard model - standard model name written in **bold** text combined with underline (**___**).
-- Saved model link. By default this cell has yellow color (HEX code - `#FFFF00`).
-- Loaded model link. By default this cell has blue color (HEX code - `#00B0F0`).
-- Saved rows block. By default this cell has green color (HEX code - `#00FF00`).
-- Loaded rows block. By default this cell has orange color (HEX code - ``#F1C232`).
+- Saved model link. By default this cell has yellow color filling (HEX code - `#FFFF00`).
+- Loaded model link. By default this cell has blue color filling (HEX code - `#00B0F0`).
+- Saved rows block. By default this cell has green color filling (HEX code - `#00FF00`).
+- Loaded rows block. By default this cell has orange color filling (HEX code - ``#F1C232`).
 
 *Configuration example:*
 
@@ -125,5 +125,35 @@ But you can redefine the order and amount of used columns for each standard mode
 | **17** | Courage test | Psychology  |
 | **18** | PHP test     | Programming |
 | **19** | Git test     | Programming |
+
+## Working with relational data
+
+We can remember any model like this:
+
+|       | A                | B      | C                        | D           | E                |
+| ----- | ---------------- | ------ | ------------------------ | ----------- | ---------------- |
+| **1** | **Tests**        |        |                          |             |                  |
+| **2** | *Name*           | *Type* | *Description*            | *Category*  |                  |
+| **3** | Temperament test | Closed | This is temperament test | Psychology  | Temperament test |
+
+The cell must be located right after the last filled attribute column and have **blue filling** (you can override
+that). You need to specify label of saved link, in this case it matches the `name` attribute of the model. The label
+can have any name that your want and only used in Excel file for linking purpose.
+
+Later you can retrieve that link and use it like that:
+
+|       | A                | B                                | C                 |
+| ----- |----------------- | -------------------------------- | ----------------- |
+| **6** |                  |                                  |                   |
+| **7** | **Question**     |                                  |                   |
+| **8** | *Test*           | *Content*                        | *Answers display* |
+| **9** | Temperament test | What PHP frameworks do you know? | Line-by-line      |
+
+The cell `A9` must have **yellow filling** (you can override that), otherwise it will be treated as value, not link.
+
+As a result, after saving linked model primary key value will be fetched and assigned to this attribute.
+
+Obviously before marking cell as linked to other model primary key, you need to mark according model for saving above
+(in case of the same sheet) or in previous sheets.
 
 Filling example is available [here](https://docs.google.com/spreadsheets/d/1WQp1JkQNU8tAxX1nMg7rEd_G0kqkaqIVeFx1CjHWHgM/edit?usp=sharing).

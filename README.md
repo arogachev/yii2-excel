@@ -12,7 +12,7 @@ In case of memory shortage I can advise splitting data into smaller chunks.
 - This is not just a wrapper on some PHPExcel methods, it's a tool helping import data from Excel in human readable
 form with minimal configuration.
 - This is designed for periodical import.
-- The library is more effective when working with multiple models and complex data structures.
+- The library is more effective when working with multiple related models and complex data structures.
 
 [![Latest Stable Version](https://poser.pugx.org/arogachev/yii2-excel/v/stable)](https://packagist.org/packages/arogachev/yii2-excel)
 [![Total Downloads](https://poser.pugx.org/arogachev/yii2-excel/downloads)](https://packagist.org/packages/arogachev/yii2-excel)
