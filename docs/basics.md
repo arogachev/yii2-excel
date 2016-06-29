@@ -34,7 +34,7 @@ Base attribute belonging to standard model.
 Properties:
 
 - `name` - related attribute name. Required.
-- `label` = user-friendly label. Optional, by default it's taken from ActiveRecord `attributeLabels()` list.
+- `label` - user-friendly label. Optional, by default it's taken from ActiveRecord `attributeLabels()` list.
 - `valueReplacement` - value mapping to avoid hard coding ids, constants or convert / format value to desired state.
 You can specify a list, for example: `Test::getTypesList()`, where `getTypesList` method can be declared like this:
 
