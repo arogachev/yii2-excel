@@ -7,6 +7,8 @@ ActiveRecord import and export based on PHPExcel for Yii 2 framework.
 [![Latest Unstable Version](https://poser.pugx.org/arogachev/yii2-excel/v/unstable)](https://packagist.org/packages/arogachev/yii2-excel)
 [![License](https://poser.pugx.org/arogachev/yii2-excel/license)](https://packagist.org/packages/arogachev/yii2-excel)
 
+- [Intro](docs/intro.md)
+- [Basics](docs/basics.md)
 - [Installation](#installation)
 - [Basic import](#basic-import)
 - [Advanced import](#advanced-import)
@@ -76,44 +78,6 @@ $importer = new Importer([
         ],
     ],
 ]);
-```
-
-where `getTypesList()` method must be declared like this:
-
-```php
-<?php
-
-namespace frontend\models;
-
-use yii\db\ActiveRecord;
-
-class Test extends ActiveRecord
-{
-    // Types
-
-    /**
-     * Selecting from the list of answers
-     */
-    const TYPE_CLOSED = 1;
-
-    /**
-     * Writing answer manually
-     */
-    const TYPE_OPENED = 2;
-
-    ...
-
-    /**
-     * @return array
-     */
-    public static function getTypesList()
-    {
-       return [
-           self::TYPE_CLOSED => 'Closed',
-           self::TYPE_OPENED => 'Opened',
-       ];
-    }
-}
 ```
 
 Filling example with notes is available [here](https://docs.google.com/spreadsheets/d/1BjScMwz10s80b6gh4QzzENJygd50jXdyoc_pvQFPGrk/edit?usp=sharing).
