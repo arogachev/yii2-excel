@@ -4,7 +4,7 @@ Advanced import has all basic import features plus some additional features:
 
 - Multiple sheets for grouping data
 - Multiple models
-- Remembering of attribute names for each model and redefining them on the fly
+- Remembering attribute names for each model and redefining them on the fly
 - Model defaults
 - Linking models through primary keys
 - Saving and loading any amount of rows to prevent copy pasting and reduce amount of filling data
