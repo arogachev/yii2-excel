@@ -2,16 +2,27 @@
 
 ActiveRecord import and export based on PHPExcel for Yii 2 framework.
 
+This library is mainly designed to import data, export is in the raw condition (even it's working in basic form),
+under development and not documented yet.
+
+The important notes:
+
+- It uses ActiveRecord models and PHPExcel library, so operating big data requires pretty good hardware, especially RAM.
+In case of memory shortage I can advise splitting data into smaller chunks.
+- This is not just a wrapper on some PHPExcel methods, it's a tool helping import data from Excel in human readable
+form with minimal configuration.
+- This is designed for periodical import.
+- The library is more effective when working with multiple models and complex data structures.
+
 [![Latest Stable Version](https://poser.pugx.org/arogachev/yii2-excel/v/stable)](https://packagist.org/packages/arogachev/yii2-excel)
 [![Total Downloads](https://poser.pugx.org/arogachev/yii2-excel/downloads)](https://packagist.org/packages/arogachev/yii2-excel)
 [![Latest Unstable Version](https://poser.pugx.org/arogachev/yii2-excel/v/unstable)](https://packagist.org/packages/arogachev/yii2-excel)
 [![License](https://poser.pugx.org/arogachev/yii2-excel/license)](https://packagist.org/packages/arogachev/yii2-excel)
 
-- [Intro](docs/intro.md)
 - [Installation](#installation)
-- [Basics](docs/basics.md)
+- [Import Basics](docs/import-basics.md)
 - [Basic import](docs/import-basic.md)
-- [Advanced import](#advanced-import)
+- [Advanced import](docs/import-advanced.md)
 - [Running import](#running-import)
 
 ## Installation
@@ -31,80 +42,6 @@ or add
 ```
 
 to the require section of your `composer.json` file.
-
-## Advanced import
-
-*Features:*
-
-- Multiple sheets for grouping data
-- Multiple models
-- Remembering of attribute names for each model
-- Model defaults
-- Linking models through primary keys
-- Saving and loading any amount of rows
-
-*Configuration example:*
-
-```php
-use arogachev\excel\import\advanced\Importer;
-use frontend\models\Answer;
-use frontend\models\Category;
-use frontend\models\Question;
-use frontend\models\Test;
-use Yii;
-use yii\helpers\Html;
-
-$importer = new Importer([
-    'filePath' => Yii::getAlias('@frontend/data/test.xlsx'),
-    'sheetNames' => ['PHP test', 'Courage test'],
-    'standardModelsConfig' => [
-        [
-            'className' => Test::className(),
-            'labels' => ['Test', 'Tests'],
-            'standardAttributesConfig' => [
-                [
-                    'name' => 'type',
-                    'valueReplacement' => Test::getTypesList(),
-                ],
-                [
-                    'name' => 'description',
-                    'valueReplacement' => function ($value) {
-                        return $value ? Html::tag('p', $value) : '';
-                    },
-                ],
-                [
-                    'name' => 'category_id',
-                    'valueReplacement' => function ($value) {
-                        return Category::find()->select('id')->where(['name' => $value]);
-                    },
-                ],
-            ],
-        ],
-        [
-            'className' => Question::className(),
-            'labels' => ['Question', 'Questions'],
-            'standardAttributesConfig' => [
-                [
-                    'name' => 'display',
-                    'valueReplacement' => Question::getDisplayList(),
-                ],
-            ],
-        ],
-        [
-            'className' => Answer::className(),
-            'labels' => ['Answer', 'Answers'],
-            'standardAttributesConfig' => [
-                [
-                    'name' => 'is_supplemented_by_text',
-                    'valueReplacement' => Yii::$app->formatter->booleanFormat,
-                ],
-            ],
-        ],
-    ],
-]);
-```
-
-Filling example is available [here](https://docs.google.com/spreadsheets/d/1WQp1JkQNU8tAxX1nMg7rEd_G0kqkaqIVeFx1CjHWHgM/edit?usp=sharing).
 
 ## Running import
 

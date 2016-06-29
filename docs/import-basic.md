@@ -1,4 +1,4 @@
-## Basic import
+# Basic import
 
 *Features:*
 
@@ -48,12 +48,12 @@ $importer = new Importer([
 
 *Filling example:*
 
-|     | A   | B                | C      | D                        | E           |
-| --- | --- | ---------------- | ------ | ------------------------ | ----------- |
-| 1   | ID  | Name             | Type   | Description              | Category    |
-| 2   | 1   | Temperament test | Closed | This is temperament test | Psychology  |
-| 3   |     | PHP test         | Closed |                          | Programming |
-| 4   |     | Git test         | Opened |                          | Programming |
+|       | A   | B                | C      | D                        | E           |
+| ----- | --- | ---------------- | ------ | ------------------------ | ----------- |
+| **1** | ID  | Name             | Type   | Description              | Category    |
+| **2** | 1   | Temperament test | Closed | This is temperament test | Psychology  |
+| **3** |     | PHP test         | Closed |                          | Programming |
+| **4** |     | Git test         | Opened |                          | Programming |
 
 - Attribute names / labels must be placed in first filled row.
 - When primary key is specified, then it's update mode, otherwise - create mode.
