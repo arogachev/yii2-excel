@@ -144,10 +144,10 @@ Later you can retrieve that link and use it like that:
 
 |       | A                | B                                | C                 |
 | ----- |----------------- | -------------------------------- | ----------------- |
-| **6** |                  |                                  |                   |
-| **7** | **Question**     |                                  |                   |
-| **8** | *Test*           | *Content*                        | *Answers display* |
-| **9** | Temperament test | What PHP frameworks do you know? | Line-by-line      |
+| **4** |                  |                                  |                   |
+| **5** | **Question**     |                                  |                   |
+| **6** | *Test*           | *Content*                        | *Answers display* |
+| **7** | Temperament test | What PHP frameworks do you know? | Line-by-line      |
 
 The cell `A9` must have **yellow filling** (you can override that), otherwise it will be treated as value, not link.
 
