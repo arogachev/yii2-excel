@@ -159,15 +159,15 @@ Obviously before marking cell as linked to other model primary key, you need to 
 Also, when you switch to filling model of different type, the link to last filled model of previous used type is
 remembered automatically, so to use it you need just mark the cell as loaded model link and don't write the label:
 
-|       | A            | B                                | C                             | D           | E        |
-| ----- | ------------ | -------------------------------- | ----------------------------- | ----------- | -------- |
-| **1** | **Test**     |                                  |                               |             |          |
-| **2** | *Name*       | *Type*                           | *Description*                 | *Category*  |          |
-| **3** | PHP test     | Closed                           | How good are your PHP skills? | Programming | PHP test |
-| **4** |              |                                  |                               |             |          |
-| **5** | **Question** |                                  |                               |             |          |
-| **6** | *Test*       | *Content*                        | *Answers display*             |             |          |
-| **7** |              | What PHP frameworks do you know? | Line-by-line                  |             |          |
+|       | A            | B                                | C                             | D           |
+| ----- | ------------ | -------------------------------- | ----------------------------- | ----------- |
+| **1** | **Test**     |                                  |                               |             |
+| **2** | *Name*       | *Type*                           | *Description*                 | *Category*  |
+| **3** | PHP test     | Closed                           | How good are your PHP skills? | Programming |
+| **4** |              |                                  |                               |             |
+| **5** | **Question** |                                  |                               |             |
+| **6** | *Test*       | *Content*                        | *Answers display*             |             |
+| **7** |              | What PHP frameworks do you know? | Line-by-line                  |             |
 
 The cell `A7` must have **yellow filling** (you can override that), otherwise it will be treated as value, not link.
 
