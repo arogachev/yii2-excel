@@ -255,28 +255,28 @@ and just fill the data.
 It's recommended to move defaults to separate sheet and place it before the others and provide this template to content
 managers.
 
-|      | A                                | B                         | C                                  | D           |
-| ---- | -------------------------------- | ------------------------- | ---------------------------------- | ----------- |
-| *1*  | **Test**                         |                           |                                    |             |
-| *2*  | *Name*                           |	*Type*                    |	*Description*	                   | *Category*  |
-| *3*  | PHP test                         |	Closed	                  | This test show good are you at PHP | Programming |
-| *4*  |                                  |                           |                                    |             |
-| *5*  | **Question**                     |                           |                                    |             |
-| *6*  | *Content*	                      | *Display*                 |                                    |             |
-| *7*  | What PHP frameworks do you know? |	Line-by-line              |                                    |             |
-| *8*  |                                  |                           |                                    |             |
-| *9*  | **Answers**                      |                           |                                    |             |
-| *10* | *Content*                        |	*Is supplemented by text* |                                    |             |
-| *11* | Yii2                             |                           |                                    |             |
-| *12* | Laravel 5                        |                           |                                    |             |
-| *13* | Symfony 2                        |                           |                                    |             |
-| *14* | Other (specify)                  |	Yes                       |                                    |             |
-| *15* |                                  |                           |                                    |             |
-| *16* | **Question**                     |                           |                                    |             |
-| *17* | Do you use VCS in your work?     |                           |                                    |             |
-| *18* |                                  |                           |                                    |             |
-| *19* | **Answers**	                  |                           |                                    |             |
-| *20* | Yes	                          |                           |                                    |             |
-| *21* | No	                              |                           |                                    |             |
+|        | A                                | B                         | C                                  | D           |
+| ------ | -------------------------------- | ------------------------- | ---------------------------------- | ----------- |
+| **1**  | **Test**                         |                           |                                    |             |
+| **2**  | *Name*                           | *Type*                    | *Description*	                     | *Category*  |
+| **3**  | PHP test                         | Closed	                | This test show good are you at PHP | Programming |
+| **4**  |                                  |                           |                                    |             |
+| **5**  | **Question**                     |                           |                                    |             |
+| **6**  | *Content*	                    | *Display*                 |                                    |             |
+| **7**  | What PHP frameworks do you know? | Line-by-line              |                                    |             |
+| **8**  |                                  |                           |                                    |             |
+| **9**  | **Answers**                      |                           |                                    |             |
+| **10** | *Content*                        | *Is supplemented by text* |                                    |             |
+| **11** | Yii2                             |                           |                                    |             |
+| **12** | Laravel 5                        |                           |                                    |             |
+| **13** | Symfony 2                        |                           |                                    |             |
+| **14** | Other (specify)                  | Yes                       |                                    |             |
+| **15** |                                  |                           |                                    |             |
+| **16** | **Question**                     |                           |                                    |             |
+| **17** | Do you use VCS in your work?     |                           |                                    |             |
+| **18** |                                  |                           |                                    |             |
+| **19** | **Answers**	                    |                           |                                    |             |
+| **20** | Yes	                            |                           |                                    |             |
+| **21** | No	                            |                           |                                    |             |
 
 Full filling example is available [here](https://docs.google.com/spreadsheets/d/1WQp1JkQNU8tAxX1nMg7rEd_G0kqkaqIVeFx1CjHWHgM/edit?usp=sharing).
