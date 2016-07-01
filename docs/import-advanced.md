@@ -240,9 +240,10 @@ defaults:
 | **1** | **Question** |
 | **2** | *Test*       |
 | **3** |              |
-| **4** | **Answer**   |
-| **5** | *Question*   |
-| **6** |              |
+| **4** |              |
+| **5** | **Answer**   |
+| **6** | *Question*   |
+| **7** |              |
 
 Cells `A3` and `A6` is marked as loaded model links (yellow filling is used by default, you can override that).
 
