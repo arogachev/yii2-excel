@@ -201,12 +201,12 @@ is different (for example `closed` type):
 
 |       | A             | B      | C             |
 | ----- | ------------- | ------ | ------------- |
-|       |               |        |               |
-| **4** | **Tests**     |        |               |
-| **5** | *Name*        | *Type* | *Description* |
-| **6** | Git test      |        |               |
-| **7** | Database test |        |               |
-| **8** | PHP test      | Closed |               |
+| **4** |               |        |               |
+| **5** | **Tests**     |        |               |
+| **6** | *Name*        | *Type* | *Description* |
+| **7** | Git test      |        |               |
+| **8** | Database test |        |               |
+| **9** | PHP test      | Closed |               |
 
 You can specify defaults at any moment that you want and redefine as many times as you want. If you want to add one more
 default value, you don't need to copy paste previous default values (they are remembered already), just write needed
