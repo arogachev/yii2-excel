@@ -257,7 +257,7 @@ managers.
 
 |      | A                                | B                         | C                                  | D           |
 | ---- | -------------------------------- | ------------------------- | ---------------------------------- | ----------- |
-| *1*  | **Test*                          |                           |                                    |             |
+| *1*  | **Test**                         |                           |                                    |             |
 | *2*  | *Name*                           |	*Type*                    |	*Description*	                   | *Category*  |
 | *3*  | PHP test                         |	Closed	                  | This test show good are you at PHP | Programming |
 | *4*  |                                  |                           |                                    |             |
