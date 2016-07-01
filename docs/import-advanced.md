@@ -136,9 +136,9 @@ We can remember any model like this:
 | **2** | *Name*   | *Type* | *Description*                 | *Category*  |          |
 | **3** | PHP test | Closed | How good are your PHP skills? | Programming | PHP test |
 
-The cell must be located right after the last filled attribute column and have **blue filling** (you can override
-that). You need to specify label of saved link, in this case it matches the `name` attribute of the model. The label
-can have any name that your want and only used in Excel file for linking purpose.
+The saved model link (cell `E3`) must be located right after the last filled attribute column and have **blue filling**
+(you can override that). You need to specify label of saved link, in this case it matches the `name` attribute of the
+model. The label can have any name that your want and only used in Excel file for linking purpose.
 
 Later you can retrieve that link and use it like that:
 
@@ -156,4 +156,19 @@ As a result, after saving linked model primary key value will be fetched and ass
 Obviously before marking cell as linked to other model primary key, you need to mark according model for saving above
 (in case of the same sheet) or in previous sheets.
 
-Filling example is available [here](https://docs.google.com/spreadsheets/d/1WQp1JkQNU8tAxX1nMg7rEd_G0kqkaqIVeFx1CjHWHgM/edit?usp=sharing).
+Also, when you switch to filling model of different type, the link to last filled model of previous used type is
+remembered automatically, so to use it you need just mark the cell as loaded model link and don't write the label:
+
+|       | A            | B                                | C                             | D           | E        |
+| ----- | ------------ | -------------------------------- | ----------------------------- | ----------- | -------- |
+| **1** | **Test**     |                                  |                               |             |          |
+| **2** | *Name*       | *Type*                           | *Description*                 | *Category*  |          |
+| **3** | PHP test     | Closed                           | How good are your PHP skills? | Programming | PHP test |
+| **4** |              |                                  |                               |             |          |
+| **5** | **Question** |                                  |                               |             |          |
+| **6** | *Test*       | *Content*                        | *Answers display*             |             |          |
+| **7** |              | What PHP frameworks do you know? | Line-by-line                  |             |          |
+
+The cell `A7` must have **yellow filling** (you can override that), otherwise it will be treated as value, not link.
+
+Full filling example is available [here](https://docs.google.com/spreadsheets/d/1WQp1JkQNU8tAxX1nMg7rEd_G0kqkaqIVeFx1CjHWHgM/edit?usp=sharing).
