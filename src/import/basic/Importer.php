@@ -44,14 +44,10 @@ class Importer extends BaseImporter
 
         $this->fillModels($this->_phpExcel->getActiveSheet()->getRowIterator());
 
-        foreach ($this->_models as $model) {
-            $model->load();
-            $model->validate();
-        }
-
         Yii::$app->db->transaction(function () {
             foreach ($this->_models as $model) {
-                $model->save(false);
+                $model->load();
+                $model->save();
             }
         });
 
