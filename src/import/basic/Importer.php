@@ -51,7 +51,7 @@ class Importer extends BaseImporter
 
         Yii::$app->db->transaction(function () {
             foreach ($this->_models as $model) {
-                $model->save(false);
+                $model->save();
             }
         });
 
