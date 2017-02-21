@@ -20,7 +20,7 @@ There are few types of cells in advanced import:
 - Saved model link. By default this cell has yellow color filling (HEX code - `#FFFF00`).
 - Loaded model link. By default this cell has blue color filling (HEX code - `#00B0F0`).
 - Saved rows block. By default this cell has green color filling (HEX code - `#00FF00`).
-- Loaded rows block. By default this cell has orange color filling (HEX code - ``#F1C232`).
+- Loaded rows block. By default this cell has orange color filling (HEX code - `#F1C232`).
 
 **Important note:** because of limitations of Github Flavored Markdown, it's impossible to use underlined text or color
 filling, so pay attention to notes near the examples. Also please refer to Excel file at the end of this document for
