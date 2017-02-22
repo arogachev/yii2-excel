@@ -2,7 +2,6 @@
 
 namespace arogachev\excel\import\basic;
 
-use arogachev\excel\components\Model as BaseModel;
 use arogachev\excel\import\DI;
 use arogachev\excel\import\exceptions\RowException;
 use PHPExcel_Worksheet_Row;
@@ -10,8 +9,9 @@ use yii\base\Component;
 
 /**
  * @property StandardModel $standardModel
+ * @property \yii\db\ActiveRecord $instance
  */
-class Model extends BaseModel
+class Model extends Component
 {
     const EVENT_INIT = 'init';
 
@@ -21,9 +21,19 @@ class Model extends BaseModel
     public $row;
 
     /**
-     * @inheritdoc
+     * @var StandardModel
      */
-    protected static $attributeClassName = 'arogachev\excel\import\basic\Attribute';
+    protected $_standardModel;
+
+    /**
+     * @var Attribute[]
+     */
+    protected $_attributes = [];
+
+    /**
+     * @var \yii\db\ActiveRecord
+     */
+    protected $_instance;
 
 
     /**
@@ -31,8 +41,7 @@ class Model extends BaseModel
      */
     public function init()
     {
-        parent::init();
-
+        $this->initAttributes();
         $this->trigger(self::EVENT_INIT);
     }
 
@@ -50,6 +59,14 @@ class Model extends BaseModel
         }
     }
 
+    /**
+     * @param array $config
+     */
+    protected function initAttribute($config)
+    {
+        $this->_attributes[] = new Attribute($config);
+    }
+
     public function load()
     {
         $this->loadExisting();
@@ -58,58 +75,42 @@ class Model extends BaseModel
 
     protected function loadExisting()
     {
-        if ($this->isPkEmpty()) {
+        $pk = [];
+        foreach ($this->_attributes as $attribute) {
+            //if (in_array($attribute->standardAttribute->name, $this->_instance->primaryKey())) {
+            if (in_array($attribute->standardAttribute->name, $attribute->standardAttribute->primaryKey())) {
+                $pk[$attribute->standardAttribute->name] = $attribute->value;
+            }
+        }
+
+        if (!$pk) {
             return;
+        }
+
+        if (count($pk) == 1 && !reset($pk)) {
+            return;
+        }
+
+        foreach ($pk as $value) {
+            if (!$value) {
+                throw new RowException($this->row, 'For updated model all primary key attributes must be specified.');
+            }
         }
 
         /* @var $modelClass \yii\db\ActiveRecord */
         $modelClass = $this->_standardModel->className;
-        $model = $modelClass::findOne($this->getPkValues());
-        if ($model) {
-            $this->_instance = $model;
-        }
-    }
+        $model = $modelClass::find()->where($pk)->andWhere($this->_standardModel->where)->one();
 
-    /**
-     * @return Attribute[]
-     */
-    protected function getPk()
-    {
-        $attributes = [];
-        foreach ($this->_attributes as $attribute) {
-            if (in_array($attribute->standardAttribute->name, $this->_instance->primaryKey())) {
-                $attributes[] = $attribute;
-            }
+        if (!$model) {
+            //throw new RowException($this->row, 'Model for update not found.');
+            $model = new $modelClass();
         }
 
-        return $attributes;
-    }
-
-    /**
-     * @return array
-     */
-    protected function getPkValues()
-    {
-        $values = [];
-        foreach ($this->getPk() as $attribute) {
-            $values[$attribute->standardAttribute->name] = $attribute->value;
+        foreach ($this->_standardModel->extendAttributesConfig as $name => $value) {
+            $model->{$name} = $value;
         }
 
-        return $values;
-    }
-
-    /**
-     * @return boolean
-     */
-    protected function isPkEmpty()
-    {
-        foreach ($this->getPkValues() as $value) {
-            if ($value) {
-                return false;
-            }
-        }
-
-        return true;
+        $this->_instance = $model;
     }
 
     protected function assignMassively()
@@ -138,5 +139,37 @@ class Model extends BaseModel
         }
 
         $this->_instance->save(false);
+    }
+
+    /**
+     * @return StandardModel
+     */
+    public function getStandardModel()
+    {
+        return $this->_standardModel;
+    }
+
+    /**
+     * @param StandardModel $value
+     */
+    public function setStandardModel($value)
+    {
+        $this->_standardModel = $value;
+    }
+
+    /**
+     * @return \yii\db\ActiveRecord
+     */
+    public function getInstance()
+    {
+        return $this->_instance;
+    }
+
+    /**
+     * @param \yii\db\ActiveRecord $value
+     */
+    public function setInstance($value)
+    {
+        $this->_instance = $value;
     }
 }
