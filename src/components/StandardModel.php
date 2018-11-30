@@ -3,7 +3,7 @@
 namespace arogachev\excel\components;
 
 use yii\base\InvalidParamException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 
 /**

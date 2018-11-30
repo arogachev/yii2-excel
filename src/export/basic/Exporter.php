@@ -4,7 +4,7 @@ namespace arogachev\excel\export\basic;
 
 use PHPExcel;
 use PHPExcel_IOFactory;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 class Exporter extends Object
 {

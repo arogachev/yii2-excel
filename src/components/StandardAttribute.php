@@ -3,7 +3,7 @@
 namespace arogachev\excel\components;
 
 use arogachev\excel\exceptions\StandardAttributeException;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * @property StandardModel $standardModel

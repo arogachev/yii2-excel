@@ -1,5 +1,8 @@
 # Yii 2 Excel
 
+** This is fork of https://github.com/arogachev/yii2-excel **
+Fixed compatibility issues with PHP 7.2 
+
 ActiveRecord import and export based on PHPExcel for Yii 2 framework.
 
 This library is mainly designed to import data, export is in the raw condition (even it's working in basic form),
