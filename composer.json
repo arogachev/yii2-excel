@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "arogachev\\excel\\": "src"
+            "divad942\\excel\\": "src"
         }
     }
 }
