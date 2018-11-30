@@ -9,7 +9,7 @@ use yii\base\BaseObject;
  * @property StandardModel $standardModel
  * @property string $column
  */
-class StandardAttribute extends Object
+class StandardAttribute extends BaseObject
 {
     /**
      * @var string
