@@ -19,13 +19,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist arogachev/yii2-excel
+php composer.phar require --prefer-dist divad942/yii2-excel
 ```
 
 or add
 
 ```
-"arogachev/yii2-excel": "*"
+"divad942/yii2-excel": "*"
 ```
 
 to the require section of your `composer.json` file.

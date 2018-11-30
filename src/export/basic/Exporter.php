@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\export\basic;
+namespace divad942\excel\export\basic;
 
 use PHPExcel;
 use PHPExcel_IOFactory;

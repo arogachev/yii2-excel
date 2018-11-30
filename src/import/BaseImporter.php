@@ -1,10 +1,10 @@
 <?php
 
-namespace arogachev\excel\import;
+namespace divad942\excel\import;
 
-use arogachev\excel\import\basic\Model;
-use arogachev\excel\import\basic\StandardModel;
-use arogachev\excel\import\exceptions\ImportException;
+use divad942\excel\import\basic\Model;
+use divad942\excel\import\basic\StandardModel;
+use divad942\excel\import\exceptions\ImportException;
 use PHPExcel;
 use PHPExcel_IOFactory;
 use Yii;

@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\import;
+namespace divad942\excel\import;
 
-use arogachev\excel\import\exceptions\CellException;
+use divad942\excel\import\exceptions\CellException;
 use PHPExcel_Cell;
 use yii\base\BaseObject;
 

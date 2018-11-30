@@ -29,7 +29,7 @@ better understanding.
 *Configuration example:*
 
 ```php
-use arogachev\excel\import\advanced\Importer;
+use divad942\excel\import\advanced\Importer;
 use frontend\models\Answer;
 use frontend\models\Category;
 use frontend\models\Question;

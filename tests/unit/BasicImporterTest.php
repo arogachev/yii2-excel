@@ -1,6 +1,6 @@
 <?php
 
-use arogachev\excel\import\basic\Importer;
+use divad942\excel\import\basic\Importer;
 use data\Author;
 use data\Test;
 use yii\codeception\TestCase;

@@ -12,7 +12,7 @@
 *Configuration example:*
 
 ```php
-use arogachev\excel\import\basic\Importer;
+use divad942\excel\import\basic\Importer;
 use frontend\models\Category;
 use frontend\models\Test;
 use Yii;

@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\import\basic;
+namespace divad942\excel\import\basic;
 
-use arogachev\excel\components\Attribute as BaseAttribute;
-use arogachev\excel\import\exceptions\CellException;
+use divad942\excel\components\Attribute as BaseAttribute;
+use divad942\excel\import\exceptions\CellException;
 use PHPExcel_Cell;
 use yii\base\Component;
 use yii\base\InvalidParamException;

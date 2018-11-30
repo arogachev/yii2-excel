@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\export\basic;
+namespace divad942\excel\export\basic;
 
-use arogachev\excel\components\StandardModel as BaseStandardModel;
-use arogachev\excel\export\exceptions\ExportException;
+use divad942\excel\components\StandardModel as BaseStandardModel;
+use divad942\excel\export\exceptions\ExportException;
 
 /**
  * @property StandardAttribute[] $standardAttributes
@@ -18,7 +18,7 @@ class StandardModel extends BaseStandardModel
     /**
      * @inheritdoc
      */
-    protected static $standardAttributeClassName = 'arogachev\excel\export\basic\StandardAttribute';
+    protected static $standardAttributeClassName = 'divad942\excel\export\basic\StandardAttribute';
 
 
     /**

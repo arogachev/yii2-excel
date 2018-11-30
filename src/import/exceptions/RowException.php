@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\import\exceptions;
+namespace divad942\excel\import\exceptions;
 
 use PHPExcel_Worksheet_Row;
 

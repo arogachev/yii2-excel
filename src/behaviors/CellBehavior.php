@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\behaviors;
+namespace divad942\excel\behaviors;
 
-use arogachev\excel\import\advanced\Attribute;
-use arogachev\excel\import\DI;
+use divad942\excel\import\advanced\Attribute;
+use divad942\excel\import\DI;
 use yii\base\Behavior;
 
 class CellBehavior extends Behavior

@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\components;
+namespace divad942\excel\components;
 
-use arogachev\excel\exceptions\StandardAttributeException;
+use divad942\excel\exceptions\StandardAttributeException;
 use yii\base\BaseObject;
 
 /**

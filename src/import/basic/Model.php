@@ -1,10 +1,10 @@
 <?php
 
-namespace arogachev\excel\import\basic;
+namespace divad942\excel\import\basic;
 
-use arogachev\excel\components\Model as BaseModel;
-use arogachev\excel\import\DI;
-use arogachev\excel\import\exceptions\RowException;
+use divad942\excel\components\Model as BaseModel;
+use divad942\excel\import\DI;
+use divad942\excel\import\exceptions\RowException;
 use PHPExcel_Worksheet_Row;
 use yii\base\Component;
 
@@ -23,7 +23,7 @@ class Model extends BaseModel
     /**
      * @inheritdoc
      */
-    protected static $attributeClassName = 'arogachev\excel\import\basic\Attribute';
+    protected static $attributeClassName = 'divad942\excel\import\basic\Attribute';
 
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\export\exceptions;
+namespace divad942\excel\export\exceptions;
 
 use yii\base\Exception;
 

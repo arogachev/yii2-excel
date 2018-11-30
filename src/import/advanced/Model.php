@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\import\advanced;
+namespace divad942\excel\import\advanced;
 
-use arogachev\excel\import\basic\Model as BasicModel;
-use arogachev\excel\import\DI;
+use divad942\excel\import\basic\Model as BasicModel;
+use divad942\excel\import\DI;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -84,7 +84,7 @@ class Model extends BasicModel
     /**
      * @param Attribute $defaultAttribute
      * @param null|integer $index
-     * @throws \arogachev\excel\import\exceptions\CellException
+     * @throws \divad942\excel\import\exceptions\CellException
      */
     protected function mergeDefaultAttribute($defaultAttribute, $index = null)
     {

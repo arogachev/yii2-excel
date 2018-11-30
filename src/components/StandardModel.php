@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\components;
+namespace divad942\excel\components;
 
 use yii\base\InvalidParamException;
 use yii\base\BaseObject;
@@ -35,7 +35,7 @@ class StandardModel extends Object
     /**
      * @var string
      */
-    protected static $standardAttributeClassName = 'arogachev\excel\components\StandardAttribute';
+    protected static $standardAttributeClassName = 'divad942\excel\components\StandardAttribute';
 
     /**
      * @var \yii\db\ActiveRecord

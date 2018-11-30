@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\components;
+namespace divad942\excel\components;
 
 use yii\base\Component;
 
