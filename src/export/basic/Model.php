@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\export\basic;
+namespace divad942\excel\export\basic;
 
-use arogachev\excel\components\Model as BaseModel;
+use divad942\excel\components\Model as BaseModel;
 
 /**
  * @var StandardModel $standardModel
@@ -12,7 +12,7 @@ class Model extends BaseModel
     /**
      * @inheritdoc
      */
-    protected static $attributeClassName = 'arogachev\excel\export\basic\Attribute';
+    protected static $attributeClassName = 'divad942\excel\export\basic\Attribute';
 
     /**
      * @inheritdoc

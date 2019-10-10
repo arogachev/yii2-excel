@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\import\advanced;
+namespace divad942\excel\import\advanced;
 
-use arogachev\excel\import\basic\StandardModel as BasicStandardModel;
+use divad942\excel\import\basic\StandardModel as BasicStandardModel;
 
 /**
  * @property Attribute[] $defaultAttributes

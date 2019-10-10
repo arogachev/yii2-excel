@@ -1,6 +1,6 @@
 <?php
 
-use arogachev\excel\import\advanced\Importer;
+use divad942\excel\import\advanced\Importer;
 use data\Answer;
 use data\Author;
 use data\Question;

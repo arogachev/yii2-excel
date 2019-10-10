@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\import;
+namespace divad942\excel\import;
 
-use arogachev\excel\import\advanced\Importer as AdvancedImporter;
-use arogachev\excel\import\basic\Importer as BasicImporter;
+use divad942\excel\import\advanced\Importer as AdvancedImporter;
+use divad942\excel\import\basic\Importer as BasicImporter;
 use PHPExcel;
 use Yii;
 

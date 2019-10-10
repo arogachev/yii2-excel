@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\helpers;
+namespace divad942\excel\helpers;
 
 class PHPExcelHelper
 {

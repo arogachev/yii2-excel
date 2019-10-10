@@ -1,6 +1,6 @@
 <?php
 
-namespace arogachev\excel\components;
+namespace divad942\excel\components;
 
 use yii\base\Component;
 
@@ -23,7 +23,7 @@ abstract class Model extends Component
     /**
      * @var string
      */
-    protected static $attributeClassName = 'arogachev\excel\components\Attribute';
+    protected static $attributeClassName = 'divad942\excel\components\Attribute';
 
     /**
      * @var \yii\db\ActiveRecord

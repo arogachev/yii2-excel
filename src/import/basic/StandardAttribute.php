@@ -1,10 +1,10 @@
 <?php
 
-namespace arogachev\excel\import\basic;
+namespace divad942\excel\import\basic;
 
-use arogachev\excel\components\StandardAttribute as BaseStandardAttribute;
-use arogachev\excel\exceptions\StandardAttributeException;
-use yii\base\Object;
+use divad942\excel\components\StandardAttribute as BaseStandardAttribute;
+use divad942\excel\exceptions\StandardAttributeException;
+use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 
 /**

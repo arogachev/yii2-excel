@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\export\basic;
+namespace divad942\excel\export\basic;
 
-use arogachev\excel\components\StandardAttribute as BaseStandardAttribute;
+use divad942\excel\components\StandardAttribute as BaseStandardAttribute;
 
 /**
  * @var StandardModel $standardModel

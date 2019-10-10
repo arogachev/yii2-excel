@@ -1,5 +1,5 @@
 {
-    "name": "arogachev/yii2-excel",
+    "name": "divad942/yii2-excel",
     "description": "ActiveRecord import and export based on PHPExcel for Yii 2 framework",
     "keywords": [
         "yii2",
@@ -9,17 +9,17 @@
         "export",
         "active record"
     ],
-    "homepage": "https://github.com/arogachev/yii2-excel",
+    "homepage": "https://github.com/divad942/yii2-excel",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Alexey Rogachev",
-            "email": "arogachev90@gmail.com"
+            "name": "David Baselj",
+            "email": "divad942@gmail.com"
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
+        "yiisoft/yii2": ">=2.0.13",
         "phpoffice/phpexcel": "1.8.*"
     },
     "require-dev": {
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "arogachev\\excel\\": "src"
+            "divad942\\excel\\": "src"
         }
     }
 }

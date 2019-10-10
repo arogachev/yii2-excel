@@ -1,14 +1,14 @@
 <?php
 
-namespace arogachev\excel\import\basic;
+namespace divad942\excel\import\basic;
 
-use arogachev\excel\components\StandardModel as BaseStandardModel;
-use arogachev\excel\import\exceptions\CellException;
-use arogachev\excel\import\exceptions\RowException;
+use divad942\excel\components\StandardModel as BaseStandardModel;
+use divad942\excel\import\exceptions\CellException;
+use divad942\excel\import\exceptions\RowException;
 use PHPExcel_Worksheet_Row;
 use yii\base\Event;
 use yii\base\InvalidParamException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -27,7 +27,7 @@ class StandardModel extends BaseStandardModel
     /**
      * @inheritdoc
      */
-    protected static $standardAttributeClassName = 'arogachev\excel\import\basic\StandardAttribute';
+    protected static $standardAttributeClassName = 'divad942\excel\import\basic\StandardAttribute';
 
     /**
      * @var array

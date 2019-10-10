@@ -1,9 +1,9 @@
 <?php
 
-namespace arogachev\excel\export\basic;
+namespace divad942\excel\export\basic;
 
-use arogachev\excel\components\Attribute as BaseAttribute;
-use arogachev\excel\export\exceptions\ExportException;
+use divad942\excel\components\Attribute as BaseAttribute;
+use divad942\excel\export\exceptions\ExportException;
 use yii\base\InvalidParamException;
 
 /**

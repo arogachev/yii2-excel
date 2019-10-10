@@ -1,11 +1,11 @@
 <?php
 
-namespace arogachev\excel\import\advanced;
+namespace divad942\excel\import\advanced;
 
-use arogachev\excel\behaviors\CellBehavior;
-use arogachev\excel\import\basic\Attribute as BasicAttribute;
-use arogachev\excel\import\DI;
-use arogachev\excel\import\exceptions\CellException;
+use divad942\excel\behaviors\CellBehavior;
+use divad942\excel\import\basic\Attribute as BasicAttribute;
+use divad942\excel\import\DI;
+use divad942\excel\import\exceptions\CellException;
 use Yii;
 
 /**

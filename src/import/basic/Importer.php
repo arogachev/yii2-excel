@@ -1,10 +1,10 @@
 <?php
 
-namespace arogachev\excel\import\basic;
+namespace divad942\excel\import\basic;
 
-use arogachev\excel\helpers\PHPExcelHelper;
-use arogachev\excel\import\BaseImporter;
-use arogachev\excel\import\exceptions\RowException;
+use divad942\excel\helpers\PHPExcelHelper;
+use divad942\excel\import\BaseImporter;
+use divad942\excel\import\exceptions\RowException;
 use Yii;
 
 class Importer extends BaseImporter

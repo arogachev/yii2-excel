@@ -1,6 +1,6 @@
 <?php
 
-use arogachev\excel\export\basic\Exporter;
+use divad942\excel\export\basic\Exporter;
 use data\Test;
 use yii\codeception\TestCase;
 use yii\helpers\HtmlPurifier;

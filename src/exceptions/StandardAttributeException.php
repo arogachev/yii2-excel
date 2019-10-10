@@ -1,8 +1,8 @@
 <?php
 
-namespace arogachev\excel\exceptions;
+namespace divad942\excel\exceptions;
 
-use arogachev\excel\components\StandardAttribute;
+use divad942\excel\components\StandardAttribute;
 use yii\base\Exception;
 
 class StandardAttributeException extends Exception
